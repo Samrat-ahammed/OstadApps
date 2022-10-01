@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Color buttonColor = Colors.green;
-    Color? inButtonColor = Colors.green[50];
 
     return Scaffold(
       body: SafeArea(
@@ -17,83 +20,129 @@ class HomePage extends StatelessWidget {
             children: [
               AppBar(),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               Card(size),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
-              Column(
+              const Class_of_Ostad(),
+              const SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                flex: 5,
+                child: PageView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    liveClassButton(),
+                    liveClassButton(),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      for (var i = 0; i < 2; i++)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          height: 60,
-                          width: 190,
-                          decoration: BoxDecoration(
-                              color: Colors.green[50],
-                              borderRadius: BorderRadius.circular(10),
-                              // ignore: prefer_const_literals_to_create_immutables
-                              boxShadow: [
-                                const BoxShadow(
-                                    color: Colors.green, blurRadius: 1)
-                              ]),
-                          child: Row(
-                            // ignore: prefer_const_literals_to_create_immutables
-                            children: [
-                              const Icon(
-                                Icons.book,
-                                size: 30,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              const Text(
-                                "My Courses",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w600),
-                              )
-                            ],
-                          ),
-                        ),
-                      // Container(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 35),
-                      //   height: 60,
-                      //   width: 200,
-                      //   decoration: BoxDecoration(
-                      //       color: Colors.green[50],
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       boxShadow: [
-                      //         const BoxShadow(
-                      //             color: Colors.green, blurRadius: 1)
-                      //       ]),
-                      //   child: Row(
-                      //     children: [
-                      //       const Icon(
-                      //         Icons.book,
-                      //         size: 30,
-                      //       ),
-                      //       const SizedBox(
-                      //         width: 10,
-                      //       ),
-                      //       const Text(
-                      //         "My Courses",
-                      //         style: TextStyle(
-                      //             fontSize: 16, fontWeight: FontWeight.w600),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
-                    ],
-                  )
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(30)),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(30)),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon:
+                          const Icon(Icons.arrow_forward, color: Colors.white),
+                    ),
+                  ),
                 ],
-              )
+              ),
+              Expanded(flex: 3, child: Container())
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Stack liveClassButton() {
+    return Stack(
+      children: [
+        Container(
+          height: 200,
+          decoration: BoxDecoration(
+            boxShadow: [const BoxShadow(color: Colors.yellow, blurRadius: 1)],
+            borderRadius: BorderRadius.circular(10),
+            image: const DecorationImage(
+              image: AssetImage("assets/images/classTeacher.jpg"),
+              fit: BoxFit.cover,
+            ),
+            color: Colors.brown,
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          top: 150,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: const EdgeInsets.only(),
+            height: 50,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10)),
+              color: Color.fromARGB(255, 237, 237, 134),
+            ),
+            child: Row(
+              children: [
+                const Spacer(),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(5)),
+                  height: 40,
+                  width: 100,
+                  child: const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Live Class",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  "Power BI for Proffessionals",
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
+                const Spacer()
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -264,6 +313,216 @@ class HomePage extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(Icons.menu, size: 30),
         ),
+      ],
+    );
+  }
+}
+
+class Class_of_Ostad extends StatelessWidget {
+  const Class_of_Ostad({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              height: 60,
+              width: 190,
+              decoration: BoxDecoration(
+                  color: Colors.green[50],
+                  borderRadius: BorderRadius.circular(10),
+                  // ignore: prefer_const_literals_to_create_immutables
+                  boxShadow: [
+                    const BoxShadow(color: Colors.green, blurRadius: 1)
+                  ]),
+              child: Row(
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  const Icon(
+                    Icons.book,
+                    size: 30,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    "My Courses",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              height: 60,
+              width: 190,
+              decoration: BoxDecoration(
+                  color: Colors.green[50],
+                  borderRadius: BorderRadius.circular(10),
+                  // ignore: prefer_const_literals_to_create_immutables
+                  boxShadow: [
+                    const BoxShadow(color: Colors.green, blurRadius: 1)
+                  ]),
+              child: Row(
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  const Icon(
+                    Icons.video_camera_front,
+                    size: 30,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    "Upcoming live",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        FittedBox(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 236, 228, 252),
+                      borderRadius: BorderRadius.circular(10),
+                      // ignore: prefer_const_literals_to_create_immutables
+                      boxShadow: [
+                        const BoxShadow(color: Colors.green, blurRadius: 1)
+                      ]),
+                  width: 150,
+                  height: 110,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: const Icon(
+                          Icons.file_open,
+                          size: 25,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text(
+                        "Resources",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 174, 192, 223),
+                      borderRadius: BorderRadius.circular(10),
+                      // ignore: prefer_const_literals_to_create_immutables
+                      boxShadow: [
+                        const BoxShadow(
+                            color: Color.fromARGB(255, 42, 82, 151),
+                            blurRadius: 1)
+                      ]),
+                  width: 150,
+                  height: 110,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Icon(
+                          Icons.video_camera_back_rounded,
+                          size: 25,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text(
+                        "Recording",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 238, 210, 208),
+                      borderRadius: BorderRadius.circular(10),
+                      // ignore: prefer_const_literals_to_create_immutables
+                      boxShadow: [
+                        const BoxShadow(color: Colors.red, blurRadius: 1)
+                      ]),
+                  width: 150,
+                  height: 110,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: const Icon(
+                          Icons.note_alt,
+                          size: 25,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text(
+                        "Assignment",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
